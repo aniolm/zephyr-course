@@ -1,0 +1,17 @@
+{
+  "name": "Zephyr Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {},
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-python.python"
+  ],
+  "remoteUser": "root",
+  "postCreateCommand": "cd ~/zephyr-course && west init -l && west update && west zephyr-export && west packages pip --install && west sdk install && west blobs fetch hal_espressif ",
+  "runArgs": ["--privileged"],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/root/zephyr-course,type=bind,consistency=cached"
+  ]
+}
