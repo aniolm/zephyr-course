@@ -2,8 +2,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED_NODE DT_ALIAS(led0)
+/* The devicetree node identifier for the "app-led" alias. */
+#define LED_NODE DT_ALIAS(app_led)
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
@@ -11,11 +11,7 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 static int get_blink_sleep_ms(void)
 {
-#ifdef CONFIG_LED_BLINK_SLEEP_MS
-    return CONFIG_LED_BLINK_SLEEP_MS;
-#else
-    return 1000;
-#endif
+    return CONFIG_APP_HEARTBEAT_PERIOD_MS;
 }
 
 int main(void)
